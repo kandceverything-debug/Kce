@@ -1,15 +1,25 @@
-import { redirect } from 'next/navigation';
-import { createServerClient as createClient } from '@/lib/supabase/server';
+'use client';
 
-export default async function RootPage() {
-  const supabase = await createClient();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase/client';
 
-  if (session) {
-    redirect('/compound');
-  }
+export default function RootPage() {
+  const router = useRouter();
 
-  redirect('/claim');
+  useEffect(() => {
+    const checkSession = async () => {
+      const supabase = createClient();
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        router.push('/compound');
+      } else {
+        router.push('/claim');
+      }
+    };
+
+    checkSession();
+  }, [router]);
+
+  return <div className="flex h-screen items-center justify-center">Loading...</div>;
 }
