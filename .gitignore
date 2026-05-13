@@ -29,12 +29,12 @@ Thumbs.db
 *.swp
 *.swo
 
-# PWA
-public/sw.js
-public/workbox-*.js
-public/worker-*.js
-public/fallback-*.js
-public/sw.js.map
-public/workbox-*.js.map
+# PWA (generated service worker files — path-anchored with ** for monorepo subdirs)
+**/public/sw.js
+**/public/sw.js.map
+**/public/sw*.js
+**/public/workbox-*.js
+**/public/workbox-*.js.map
+**/public/worker-*.js
+**/public/fallback-*.js
 *.tsbuildinfo
-public/sw*.js
